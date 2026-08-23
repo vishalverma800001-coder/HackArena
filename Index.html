@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Logistics Dashboard</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+
+  <div class="app">
+
+    <aside class="sidebar">
+      <div class="logo">
+        <div class="logo-icon">🚚</div>
+        <div>
+          <h2>LogiSmart</h2>
+          <span>Delivery Intelligence</span>
+        </div>
+      </div>
+
+      <nav>
+        <button class="nav-item active" onclick="showSection('dashboard', this)">
+          📊 Dashboard
+        </button>
+
+        <button class="nav-item" onclick="showSection('orders', this)">
+          📦 Orders
+        </button>
+
+        <button class="nav-item" onclick="showSection('agents', this)">
+          🚚 Delivery Agents
+        </button>
+
+        <button class="nav-item" onclick="showSection('tracking', this)">
+          📍 Live Tracking
+        </button>
+
+        <button class="nav-item" onclick="showSection('analytics', this)">
+          📈 Analytics
+        </button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="system-status">
+          <span class="status-dot"></span>
+          System Online
+        </div>
+        <small>HackArena'26 Project</small>
+      </div>
+    </aside>
+
+
+    <main class="main">
+
+      <header class="topbar">
+        <div>
+          <h1 id="pageTitle">Smart Logistics Dashboard</h1>
+          <p>Real-time delivery management & intelligence</p>
+        </div>
+
+        <div class="profile">
+          <div class="notification">🔔</div>
+          <div class="avatar">TL</div>
+          <div>
+            <strong>Team Admin</strong>
+            <small>Logistics Manager</small>
+          </div>
+        </div>
+      </header>
+
+
+      <!-- DASHBOARD -->
+
+      <section id="dashboard" class="section active-section">
+
+        <div class="welcome">
+          <div>
+            <h2>Good Morning 👋</h2>
+            <p>Here is today's logistics overview.</p>
+          </div>
+
+          <button class="refresh-btn" onclick="refreshData()">
+            ↻ Refresh Data
+          </button>
+        </div>
+
+
+        <div class="stats-grid">
+
+          <div class="stat-card">
+            <div class="stat-icon blue">📦</div>
+            <div>
+              <span>Total Orders</span>
+              <h2 id="totalOrders">1,248</h2>
+              <small class="positive">↑ 12.5% this week</small>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon orange">🚚</div>
+            <div>
+              <span>In Transit</span>
+              <h2 id="transitOrders">342</h2>
+              <small>Currently moving</small>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon green">✓</div>
+            <div>
+              <span>Delivered</span>
+              <h2 id="deliveredOrders">824</h2>
+              <small class="positive">↑ 8.2% today</small>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon red">⚠</div>
+            <div>
+              <span>Delayed</span>
+              <h2 id="delayedOrders">28</h2>
+              <small class="negative">Needs attention</small>
+            </div>
+          </div>
+
+        </div>
+
+
+        <div class="content-grid">
+
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <h3>Delivery Overview</h3>
+                <p>Today's delivery performance</p>
+              </div>
+              <span class="live-badge">● LIVE</span>
+            </div>
+
+            <div class="chart">
+              <div class="bar-container">
+                <span>Mon</span>
+                <div class="bar" style="height:45%"></div>
+              </div>
+
+              <div class="bar-container">
+                <span>Tue</span>
+                <div class="bar" style="height:62%"></div>
+              </div>
+
+              <div class="bar-container">
+                <span>Wed</span>
+                <div class="bar" style="height:52%"></div>
+              </div>
+
+              <div class="bar-container">
+                <span>Thu</span>
+                <div class="bar" style="height:76%"></div>
+              </div>
+
+              <div class="bar-container">
+                <span>Fri</span>
+                <div class="bar" style="height:68%"></div>
+              </div>
+
+              <div class="bar-container">
+                <span>Sat</span>
+                <div class="bar" style="height:88%"></div>
+              </div>
+
+              <div class="bar-container">
+                <span>Sun</span>
+                <div class="bar" style="height:72%"></div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <h3>Smart Alerts</h3>
+                <p>System detected issues</p>
+              </div>
+            </div>
+
+            <div class="alert warning">
+              <span>⚠️</span>
+              <div>
+                <strong>3 deliveries at risk</strong>
+                <small>Possible delay detected</small>
+              </div>
+            </div>
+
+            <div class="alert danger">
+              <span>🚨</span>
+              <div>
+                <strong>Route congestion</strong>
+                <small>NH-27 traffic detected</small>
+              </div>
+            </div>
+
+            <div class="alert success">
+              <span>✓</span>
+              <div>
+                <strong>System healthy</strong>
+                <small>All major services running</small>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+
+        <div class="panel recent-panel">
+
+          <div class="panel-header">
+            <div>
+              <h3>Recent Deliveries</h3>
+              <p>Latest order activity</p>
+            </div>
+
+            <button class="view-btn" onclick="showSection('orders')">
+              View All
+            </button>
+          </div>
+
+
+          <div class="table-wrapper">
+
+            <table>
+
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Customer</th>
+                  <th>Destination</th>
+                  <th>Agent</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+
+              <tbody>
+
+                <tr>
+                  <td><strong>#ORD-1024</strong></td>
+                  <td>Rahul Kumar</td>
+                  <td>Patna</td>
+                  <td>Vikash</td>
+                  <td><span class="badge delivered">Delivered</span></td>
+                </tr>
+
+                <tr>
+                  <td><strong>#ORD-1025</strong></td>
+                  <td>Priya Singh</td>
+                  <td>Darbhanga</td>
+                  <td>Aman</td>
+                  <td><span class="badge transit">In Transit</span></td>
+                </tr>
+
+                <tr>
+                  <td><strong>#ORD-1026</strong></td>
+                  <td>Aditya Raj</td>
+                  <td>Muzaffarpur</td>
+                  <td>Rohit</td>
+                  <td><span class="badge delayed">Delayed</span></td>
+                </tr>
+
+                <tr>
+                  <td><strong>#ORD-1027</strong></td>
+                  <td>Neha Sharma</td>
+                  <td>Gaya</td>
+                  <td>Sumit</td>
+                  <td><span class="badge transit">In Transit</span></td>
+                </tr>
+
+              </tbody>
+
+            </table>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ORDERS -->
+
+      <section id="orders" class="section">
+
+        <div class="section-heading">
+          <div>
+            <h2>📦 Order Management</h2>
+            <p>Track and manage all deliveries</p>
+          </div>
+
+          <button class="primary-btn" onclick="addOrder()">
+            + Add Order
+          </button>
+        </div>
+
+        <div class="panel">
+
+          <div class="search-box">
+            🔎
+            <input
+              type="text"
+              id="orderSearch"
+              placeholder="Search order, customer or destination..."
+              onkeyup="searchOrders()"
+            >
+          </div>
+
+          <div class="table-wrapper">
+
+            <table id="ordersTable">
+
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Customer</th>
+                  <th>Pickup</th>
+                  <th>Destination</th>
+                  <th>Agent</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+
+              <tbody>
+
+                <tr>
+                  <td>#ORD-1024</td>
+                  <td>Rahul Kumar</td>
+                  <td>Patna Hub</td>
+                  <td>Patna</td>
+                  <td>Vikash</td>
+                  <td><span class="badge delivered">Delivered</span></td>
+                </tr>
+
+                <tr>
+                  <td>#ORD-1025</td>
+                  <td>Priya Singh</td>
+                  <td>Patna Hub</td>
+                  <td>Darbhanga</td>
+                  <td>Aman</td>
+                  <td><span class="badge transit">In Transit</span></td>
+                </tr>
+
+                <tr>
+                  <td>#ORD-1026</td>
+                  <td>Aditya Raj</td>
+                  <td>Patna Hub</td>
+                  <td>Muzaffarpur</td>
+                  <td>Rohit</td>
+                  <td><span class="badge delayed">Delayed</span></td>
+                </tr>
+
+                <tr>
+                  <td>#ORD-1027</td>
+                  <td>Neha Sharma</td>
+                  <td>Patna Hub</td>
+                  <td>Gaya</td>
+                  <td>Sumit</td>
+                  <td><span class="badge transit">In Transit</span></td>
+                </tr>
+
+                <tr>
+                  <td>#ORD-1028</td>
+                  <td>Arjun Verma</td>
+                  <td>Patna Hub</td>
+                  <td>Hajipur</td>
+                  <td>Vikas</td>
+                  <td><span class="badge delivered">Delivered</span></td>
+                </tr>
+
+              </tbody>
+
+            </table>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- AGENTS -->
+
+      <section id="agents" class="section">
+
+        <div class="section-heading">
+          <div>
+            <h2>🚚 Delivery Agents</h2>
+            <p>Monitor delivery team performance</p>
+          </div>
+        </div>
+
+        <div class="agent-grid">
+
+          <div class="agent-card">
+            <div class="agent-avatar">VK</div>
+            <h3>Vikash Kumar</h3>
+            <span class="online">● Online</span>
+            <div class="agent-stats">
+              <span>Deliveries <b>42</b></span>
+              <span>Success <b>96%</b></span>
+            </div>
+          </div>
+
+          <div class="agent-card">
+            <div class="agent-avatar">AM</div>
+            <h3>Aman Kumar</h3>
+            <span class="online">● Online</span>
+            <div class="agent-stats">
+              <span>Deliveries <b>38</b></span>
+              <span>Success <b>94%</b></span>
+            </div>
+          </div>
+
+          <div class="agent-card">
+            <div class="agent-avatar">RS</div>
+            <h3>Rohit Singh</h3>
+            <span class="offline">● Offline</span>
+            <div class="agent-stats">
+              <span>Deliveries <b>35</b></span>
+              <span>Success <b>91%</b></span>
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- TRACKING -->
+
+      <section id="tracking" class="section">
+
+        <div class="section-heading">
+          <div>
+            <h2>📍 Live Delivery Tracking</h2>
+            <p>Monitor active deliveries</p>
+          </div>
+        </div>
+
+        <div class="tracking-layout">
+
+          <div class="map">
+            <div class="map-grid"></div>
+
+            <div class="map-marker marker-one">🚚</div>
+            <div class="map-marker marker-two">📦</div>
+            <div class="map-marker marker-three">📍</div>
+
+            <div class="map-label label-one">Delivery Van</div>
+            <div class="map-label label-two">Warehouse</div>
+            <div class="map-label label-three">Destination</div>
+          </div>
+
+          <div class="tracking-panel">
+
+            <h3>Active Delivery</h3>
+
+            <div class="tracking-order">
+              <strong>#ORD-1025</strong>
+              <span class="badge transit">In Transit</span>
+            </div>
+
+            <p>Patna Hub → Darbhanga</p>
+
+            <div class="progress">
+              <div class="progress-fill"></div>
+            </div>
+
+            <div class="tracking-info">
+              <span>Progress <b>68%</b></span>
+              <span>ETA <b>42 min</b></span>
+            </div>
+
+            <hr>
+
+            <p><strong>Agent:</strong> Aman Kumar</p>
+            <p><strong>Vehicle:</strong> BR-01-AB-4582</p>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ANALYTICS -->
+
+      <section id="analytics" class="section">
+
+        <div class="section-heading">
+          <div>
+            <h2>📈 Analytics</h2>
+            <p>Logistics performance insights</p>
+          </div>
+        </div>
+
+        <div class="analytics-grid">
+
+          <div class="analytics-card">
+            <span>On-Time Delivery</span>
+            <strong>94.8%</strong>
+            <div class="progress">
+              <div class="progress-fill" style="width:94.8%"></div>
+            </div>
+          </div>
+
+          <div class="analytics-card">
+            <span>Average Delivery Time</span>
+            <strong>38 min</strong>
+            <small>↓ 6% from last week</small>
+          </div>
+
+          <div class="analytics-card">
+            <span>Customer Satisfaction</span>
+            <strong>4.7 / 5</strong>
+            <small>Excellent performance</small>
+          </div>
+
+          <div class="analytics-card">
+            <span>Active Agents</span>
+            <strong>86</strong>
+            <small>72 currently delivering</small>
+          </div>
+
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+</body>
+                  </html>
